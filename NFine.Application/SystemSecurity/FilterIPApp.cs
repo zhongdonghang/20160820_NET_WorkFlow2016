@@ -43,7 +43,7 @@ namespace NFine.Application.SystemSecurity
             }
             else
             {
-                filterIPEntity.Create();
+                filterIPEntity.CreateWithGuId();
                 service.Insert(filterIPEntity);
             }
         }

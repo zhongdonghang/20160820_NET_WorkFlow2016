@@ -11,7 +11,7 @@ namespace NFine.Domain
 {
     public class IEntity<TEntity>
     {
-        public void Create()
+        public void CreateWithNo()
         {
             var entity = this as ICreationAudited;
             entity.F_Id = Common.CreateNo(); //Common.GuId();
@@ -22,6 +22,19 @@ namespace NFine.Domain
             }
             entity.F_CreatorTime = DateTime.Now;
         }
+
+        public void CreateWithGuId()
+        {
+            var entity = this as ICreationAudited;
+            entity.F_Id = Common.GuId();
+            var LoginInfo = OperatorProvider.Provider.GetCurrent();
+            if (LoginInfo != null)
+            {
+                entity.F_CreatorUserId = LoginInfo.UserId;
+            }
+            entity.F_CreatorTime = DateTime.Now;
+        }
+
         public void Modify(string keyValue)
         {
             var entity = this as IModificationAudited;

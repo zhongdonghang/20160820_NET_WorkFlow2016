@@ -45,7 +45,7 @@ namespace NFine.Application.SystemManage
             }
             else
             {
-                organizeEntity.Create();
+                organizeEntity.CreateWithNo();
                 service.Insert(organizeEntity);
             }
         }

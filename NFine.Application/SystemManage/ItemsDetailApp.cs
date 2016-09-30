@@ -52,7 +52,7 @@ namespace NFine.Application.SystemManage
             }
             else
             {
-                itemsDetailEntity.Create();
+                itemsDetailEntity.CreateWithGuId();
                 service.Insert(itemsDetailEntity);
             }
         }

@@ -81,7 +81,7 @@ namespace NFine.Application.SystemSecurity
             logEntity.F_IPAddressName = Net.GetLocation(logEntity.F_IPAddress);
             logEntity.F_Result = result;
             logEntity.F_Description = resultLog;
-            logEntity.Create();
+            logEntity.CreateWithGuId();
             service.Insert(logEntity);
         }
         public void WriteDbLog(LogEntity logEntity)
@@ -90,7 +90,7 @@ namespace NFine.Application.SystemSecurity
             logEntity.F_Date = DateTime.Now;
             logEntity.F_IPAddress = "117.81.192.182";
             logEntity.F_IPAddressName = Net.GetLocation(logEntity.F_IPAddress);
-            logEntity.Create();
+            logEntity.CreateWithGuId();
             service.Insert(logEntity);
         }
     }

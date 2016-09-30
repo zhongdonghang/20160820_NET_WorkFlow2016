@@ -45,7 +45,7 @@ namespace NFine.Application.SystemManage
             }
             else
             {
-                roleEntity.Create();
+                roleEntity.CreateWithNo();
                 roleEntity.F_Category = 2;
                 service.Insert(roleEntity);
             }

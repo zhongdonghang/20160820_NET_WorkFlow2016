@@ -46,7 +46,7 @@ namespace NFine.Application.SystemManage
             }
             else
             {
-                moduleEntity.Create();
+                moduleEntity.CreateWithGuId();
                 service.Insert(moduleEntity);
             }
         }

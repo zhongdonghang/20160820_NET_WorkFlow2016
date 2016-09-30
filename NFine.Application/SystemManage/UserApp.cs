@@ -46,7 +46,7 @@ namespace NFine.Application.SystemManage
             }
             else
             {
-                userEntity.Create();
+                userEntity.CreateWithNo();
             }
             service.SubmitForm(userEntity, userLogOnEntity, keyValue);
         }
