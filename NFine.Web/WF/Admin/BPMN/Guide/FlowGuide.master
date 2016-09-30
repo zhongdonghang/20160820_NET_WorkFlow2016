@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/WF/Admin/WinOpen.master" AutoEventWireup="true" CodeBehind="FlowGuide.master.cs" Inherits="CCFlow.WF.Admin.BPMN.Guide.FlowGuide" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <br />
+    <br />
+
+<a href="S1.aspx" >创建本机流程</a> - 导入本地流程模版 - 从私有云导入流程模版 - 从公有云导入流程模版<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+
+</asp:Content>

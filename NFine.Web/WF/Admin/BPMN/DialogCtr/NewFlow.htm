@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>新建流程</title>
+    <link href="../../../Comm/Style/Table0.css" rel="stylesheet" type="text/css" />
+    <link href="../../../Scripts/easyUI/themes/gray/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="../../../Scripts/easyUI/themes/icon.css" rel="stylesheet" type="text/css" />
+    <script src="../../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="../../../Scripts/jquery.easyui.min.js" type="text/javascript"></script>
+    <script src="../js/CCFlowDesignerData.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var Ele_FlowName = document.getElementById("TB_FlowName");
+            Ele_FlowName.focus();
+
+            var flowSort = getArgsFromHref("sort");
+            flowSort = flowSort.replace("F","");
+            var params = {
+                method: "Do",
+                doWhat: "GetFlowSorts"
+            };
+            ajaxService(params, function (data) {
+                var pushData = eval('(' + data + ')');
+                $('#DDL_FlowSort').combotree({
+                    lines: true,
+                    data: pushData,
+                    onLoadSuccess: function () {
+                        if (flowSort) {
+                            $('#DDL_FlowSort').combotree('setValue', flowSort);
+                        }
+                    }
+                });
+            }, this, "1");
+        });
+
+        function Find2TreeNode() {
+            var flowSort = $('#DDL_FlowSort').combotree('getValue');
+            var t = $('#DDL_FlowSort').combotree('tree'); // 获取树对象
+            if (t) {
+                t.tree('find', flowSort); 	// 获取选择的节点
+            }
+        }
+
+        function getNewFlowInfo() {
+            return {
+                flowName: $('#TB_FlowName').val(),
+                flowSort: $('#DDL_FlowSort').combotree('getValue'),
+                dataStoreModel: $('#DDL_DataStoreModel').combobox('getValue'),
+                pTable: $('#TB_PTable').val(),
+                flowCode: $('#TB_FlowCode').val(),
+                FlowVersion: document.getElementById("DDL_FlowVersion").value
+            };
+        }
+    </script>
+</head>
+<body>
+    <form id="from1" action="">
+    <table class="Table" cellpadding="0" cellspacing="0" border="0" style="width: 100%">
+        <tr>
+            <td>
+                流程名称：
+            </td>
+            <td>
+                <input id="TB_FlowName" class="easyui-textbox" style="width: 200px" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程类别：
+            </td>
+            <td>
+                <select id="DDL_FlowSort" onclick="Find2TreeNode()" class="easyui-combotree" style="width: 200px;">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                数据存储模式：
+            </td>
+            <td>
+                <select id="DDL_DataStoreModel" class="easyui-combobox" style="width: 200px;">
+                    <option value="0">数据轨迹模式</option>
+                    <option value="1">数据合并模式</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程数据表：
+            </td>
+            <td>
+                <input id="TB_PTable" class="easyui-textbox" style="width: 200px" />
+                流程数据表
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程标记：
+            </td>
+            <td>
+                <input id="TB_FlowCode" class="easyui-textbox" style="width: 200px" />
+                唯一来确定此流程的标记(可以为空)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程版本V：
+            </td>
+            <td>
+                <select id="DDL_FlowVersion" style="width: 200px;">
+                    <option value="0">v1.0</option>
+                    <option value="1" selected="selected">v2.0</option>
+                </select>
+                <span style="color:Blue;">v1.0为CCFlow模式，v2.0为BPMN模式</span>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

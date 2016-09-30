@@ -1,0 +1,159 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>流程设计器</title>
+    <link type="text/css"  href="../../Comm/Style/Table0.css" rel="stylesheet" />
+    <link type="text/css" href="../../Scripts/easyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link type="text/css" href="../../Scripts/easyUI/themes/icon.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            font-family: Arial, sans-serif, Helvetica, Tahoma;
+            font-size: 12px;
+            line-height: 1.5;
+            color: black;
+        }
+
+        #holder
+        {
+            margin: 0;
+            border: 0;
+            padding:0;
+            background-image: url('Images/bg.png'); 
+            background-repeat: repeat;
+        }
+        .menu-sep
+        {
+            height:1px;
+        }
+    </style>
+
+    <script type="text/javascript" src="../../Scripts/easyUI/jquery-1.8.0.min.js" ></script>
+    <script type="text/javascript" src="../../Scripts/easyUI/jquery.easyui.min.js" ></script>
+    <script type="text/javascript" src="../../Scripts/EasyUIUtility.js" ></script>
+    <script type="text/javascript" src="../../Scripts/Raphael/raphael.js" ></script>
+    <script type="text/javascript" src="../../Scripts/Raphael/raphael.ccflow.js" ></script>
+    <script type="text/javascript" src="../../Scripts/designer.utility.js" ></script><!--designer.utility.js必须放在designer.js之前-->
+    <script type="text/javascript" src="main.js" ></script>
+    <script type="text/javascript" src="designer.js" ></script>
+    <script type="text/javascript">
+        $(function () {
+            //定义等待界面的位置
+            $(".mymaskContainer").offset({ left: ($(document).innerWidth() - 120) / 2, top: ($(document).innerHeight() - 50) / 2 });
+            load();
+        });
+
+        function loaded() {
+            $(".mymask").hide();
+        }
+        function loading() {
+            $(".mymask").show();
+        }
+    </script>
+
+</head> 
+<body>
+    <div class="panel window mymask mymaskContainer" style="display: block; width: 120px; height:50px; z-index: 21008; text-align:center; font-size:14px; font-weight:bold">
+        <span style="display:block; margin-top:14px;">请稍候......</span>
+    </div>
+    <div class="window-shadow mymask mymaskContainer" style="display: block; z-index: 21007; width: 122px; height: 52px;"></div>
+    <div class="window-mask mymask" style="width: 100%; height: 100%; display: block; z-index: 21006;"></div>
+
+    <div id="holder" ></div>
+
+    <div id="flowMenu" class="easyui-menu" style="width: 180px;">
+        <div onclick="newNode()" data-options="iconCls:'icon-new'">
+            添加节点
+       </div>
+      
+        <div onclick="newLabel()" data-options="iconCls:'icon-new'">
+            添加标签
+       </div>
+         <!--<div onclick="newDiretion()" data-options="iconCls:'icon-new'">
+            添加连线
+        </div>-->
+        <div class="menu-sep">
+        </div>
+        <div onclick="OpenWinByDoType(Action_FlowP, f.FK_Flow)" data-options="iconCls:'icon-config'">
+            流程属性</div>
+        <div onclick="OpenWinByDoType(Action_FlowRun, f.FK_Flow)" data-options="iconCls:'icon-right'">
+            运行流程</div>
+        <div onclick="OpenWinByDoType(Action_FlowCheck, f.FK_Flow)" data-options="iconCls:'icon-check'">
+            检查流程</div>
+        <div onclick="OpenWinByDoType(Action_FlowRpt, f.FK_Flow)" data-options="iconCls:'icon-design'">
+            流程报表定义</div>
+        <div class="menu-sep">
+        </div>
+        <div onclick="showHideBgline()">
+            显示/隐藏网格</div>
+        <div onclick="javascript:action('Help')" data-options="iconCls:'icon-help'">
+            帮助</div>
+        <div>
+            异常日志</div>
+    </div>
+    <div id="nodeMenu" class="easyui-menu" style="width: 180px;">
+        <div onclick="OpenWinByDoType(Action_NodeP,f.FK_Flow,f.focusElement.id)" data-options="iconCls:'icon-config'">
+            节点属性</div>
+        <div onclick="editElementName('节点','名称',ElementType.NODE,false)" data-options="iconCls:'icon-edit'">
+            修改节点名称</div>
+        <div>
+            <span>节点类型</span>
+            <div style="width: 120px;" id="nodetypes">
+                <div id='typeOrdinary' onclick="changeNodeType(this.id)">
+                    普通节点</div>
+                <div id='typeFL' onclick="changeNodeType(this.id)">
+                    分流节点</div>
+                <div id='typeHL' onclick="changeNodeType(this.id)">
+                    合流节点</div>
+                <div id='typeFHL' onclick="changeNodeType(this.id)">
+                    分合流节点</div>
+                <div id='typeSubThread' onclick="changeNodeType(this.id)">
+                    子线程节点</div>
+            </div>
+        </div>
+        <div onclick="OpenWinByDoType(Action_StaDef,f.FK_Flow,f.focusElement.id)" data-options="iconCls:'icon-station'">
+            节点工作岗位</div>
+        <div onclick="selectIcon()" data-options="iconCls:'icon-icon'">
+            更换图标</div>
+        <div class="menu-sep">
+        </div>
+        <div data-options="iconCls:'icon-design'">
+            设计节点表单 - 傻瓜模式</div>
+        <div>
+            设计节点表单 - 自由模式</div>
+        <div class="menu-sep">
+        </div>
+        <div>表单库</div>
+        <div onclick="OpenWinByDoType(Action_FlowFrms,f.FK_Flow,f.focusElement.id)" data-options="iconCls:'icon-bind'">
+            绑定独立表单</div>
+        <div class="menu-sep">
+        </div>
+        <div onclick="deleteNode()" data-options="iconCls:'icon-delete'">
+
+            删除节点</div>
+    </div>
+    <div id="labelMenu" class="easyui-menu" style="width: 100px">
+        <div onclick="editElementName('标签','文本',ElementType.LABNOTE,true)" data-options="iconCls:'icon-edit'">
+            修改标签</div>
+        <div class="menu-sep">
+        </div>
+        <div onclick="deleteLabel()"  data-options="iconCls:'icon-delete'">
+            删除标签</div>
+    </div>
+    <div id="dirMenu" class="easyui-menu" style="width: 140px">
+        <div onclick="OpenWinByDoType(Action_Dir,f.FK_Flow,f.focusElement.node,f.focusElement.toNode)" data-options="iconCls:'icon-config'">
+            设置方向转向条件</div>
+        <div id="isBrokeLine" onclick="dirBrokenLine()">
+            是否为折线</div>
+        <div id="isCanBack" onclick="dirCanBack()">
+            是否可以原路返回</div>
+        <div class="menu-sep">
+        </div>
+        <div onclick="deleteDirection()" data-options="iconCls:'icon-delete'">
+            删除连接线</div>
+    </div>
+</body>
+</html>
+
