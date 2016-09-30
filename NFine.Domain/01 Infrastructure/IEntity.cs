@@ -14,7 +14,7 @@ namespace NFine.Domain
         public void Create()
         {
             var entity = this as ICreationAudited;
-            entity.F_Id = Common.GuId();
+            entity.F_Id = Common.CreateNo(); //Common.GuId();
             var LoginInfo = OperatorProvider.Provider.GetCurrent();
             if (LoginInfo != null)
             {

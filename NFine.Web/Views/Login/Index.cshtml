@@ -91,7 +91,8 @@
                         $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
                         $.ajax({
                             url: "/Login/CheckLogin",
-                            data: { username: $.trim($username.val()), password: $.md5($.trim($password.val())), code: $.trim($code.val()) },
+                           // data: { username: $.trim($username.val()), password: $.md5($.trim($password.val())), code: $.trim($code.val()) },
+                            data: { username: $.trim($username.val()), password: $.trim($password.val()), code: $.trim($code.val()) },
                             type: "post",
                             dataType: "json",
                             success: function (data) {
