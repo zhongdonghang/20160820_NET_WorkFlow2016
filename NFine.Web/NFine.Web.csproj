@@ -133,6 +133,9 @@
     <Compile Include="App_Start\01 Handler\HandlerErrorAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
+    <Compile Include="Areas\CC\CCAreaRegistration.cs" />
+    <Compile Include="Areas\CC\Controllers\StartController.cs" />
+    <Compile Include="Areas\CC\Models\SimpleFlowViewModel.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
@@ -11696,6 +11699,7 @@
     <Content Include="Areas\ReportManage\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\CC\Views\Shared\" />
     <Folder Include="Areas\ReportManage\Views\Echarts\" />
     <Folder Include="DataUser\AthTemplete\ND12501AthM0\" />
     <Folder Include="DataUser\BatchStartFlowTemplete\" />
@@ -11824,6 +11828,8 @@
     <Content Include="DataUser\OfficeFile\132\141.docx" />
     <Content Include="DataUser\OfficeTemplate\驰骋短信发送设备.docx" />
     <Content Include="GPM\WinOpen.master" />
+    <Content Include="Areas\CC\Views\Web.config" />
+    <Content Include="Areas\CC\Views\Start\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
     <Content Include="WF\Admin\BPMN\common\CCFlowDesignerBase.ashx" />
     <Content Include="WF\Admin\BPMN\common\controller.ashx" />
