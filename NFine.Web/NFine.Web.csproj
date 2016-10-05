@@ -135,6 +135,7 @@
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\CC\CCAreaRegistration.cs" />
     <Compile Include="Areas\CC\Controllers\StartController.cs" />
+    <Compile Include="Areas\CC\Controllers\ViewAllController.cs" />
     <Compile Include="Areas\CC\Models\SimpleFlowViewModel.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
@@ -11527,7 +11528,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\log4net.config" />
-    <Content Include="Configs\system.config" />
+    <Content Include="Configs\system.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\database.config">
@@ -11830,6 +11833,7 @@
     <Content Include="GPM\WinOpen.master" />
     <Content Include="Areas\CC\Views\Web.config" />
     <Content Include="Areas\CC\Views\Start\Index.cshtml" />
+    <Content Include="Areas\CC\Views\ViewAll\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
     <Content Include="WF\Admin\BPMN\common\CCFlowDesignerBase.ashx" />
     <Content Include="WF\Admin\BPMN\common\controller.ashx" />
