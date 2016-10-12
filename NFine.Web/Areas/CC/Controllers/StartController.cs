@@ -17,7 +17,7 @@ namespace NFine.Web.Areas.CC.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(string itemId, string keyword)
+        public ActionResult GetGridJson( string keyword)
         {
             System.Data.DataTable dt = BP.WF.Dev2Interface.DB_GenerCanStartFlowsOfDataTable(BP.Web.WebUser.No);
             List<SimpleFlowViewModel> data = new List<SimpleFlowViewModel>();
